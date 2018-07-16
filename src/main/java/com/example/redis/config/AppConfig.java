@@ -24,7 +24,7 @@ public class AppConfig {
 	@Bean
     JedisConnectionFactory jedisConnectionFactory() {
     	
-    	JedisShardInfo sharedInfo = new JedisShardInfo("10.1.12.78", 6379);
+    	JedisShardInfo sharedInfo = new JedisShardInfo("localhost", 6379);
         return new JedisConnectionFactory(sharedInfo);
     }
 
@@ -48,23 +48,18 @@ public class AppConfig {
         final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
 
         container.setConnectionFactory( jedisConnectionFactory() );
-        container.addMessageListener( messageListener(), topic1() );
+        container.addMessageListener( messageListener(), topic() );
 
         return container;
     }
 
     @Bean
     IRedisPublisher redisPublisher() {
-        return new RedisPublisherImpl( redisTemplate(), topic1() );
+        return new RedisPublisherImpl( redisTemplate(), topic() );
     }
 
     @Bean
     ChannelTopic topic() {
         return new ChannelTopic( "pubsub:queue" );
-    }
-    
-    @Bean
-    ChannelTopic topic1() {
-        return new ChannelTopic( "3064" );
     }
 }
