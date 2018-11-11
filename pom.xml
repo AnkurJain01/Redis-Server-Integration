@@ -6,7 +6,8 @@
   
   <properties>
         <project.build.sourceencoding>UTF-8</project.build.sourceencoding>
-        <spring.version>4.3.5.RELEASE</spring.version>
+      <!-- 4.3.5.RELEASE could be used as spring version -->
+        <spring.version>SPRING VERSION</spring.version>
     </properties>
   
   <dependencies>
